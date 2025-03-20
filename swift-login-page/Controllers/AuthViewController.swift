@@ -96,9 +96,9 @@ class AuthViewController: UIViewController {
     }
     
     @objc private func signUpButtonTapped() {
-        print("tap")
-//        let signUpViewController = SignUpViewController()
-//        self.present(signUpViewController, animated: true)
+        let signUpViewController = SignUpViewController()
+        signUpViewController.loadViewIfNeeded()
+        self.present(signUpViewController, animated: true)
     }
     
     @objc private func signInButtonTapped() {
@@ -144,7 +144,7 @@ extension AuthViewController {
         
         NSLayoutConstraint.activate([
             loginLabel.centerXAnchor.constraint(equalTo: backgroundView.centerXAnchor),
-            loginLabel.bottomAnchor.constraint(equalTo: textFieldsStackView.topAnchor, constant: -30)
+            loginLabel.bottomAnchor.constraint(equalTo: textFieldsStackView.topAnchor, constant: -40)
         ])
         
         NSLayoutConstraint.activate([
