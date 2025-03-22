@@ -8,8 +8,8 @@ class SignUpViewController: UIViewController {
         return scrollView
     }()
     
-    private let backgroundView: UIImageView = {
-        let backgroundView = UIImageView()
+    private let backgroundView: UIView = {
+        let backgroundView = UIView()
         backgroundView.backgroundColor = .white
         backgroundView.translatesAutoresizingMaskIntoConstraints = false
         return backgroundView
@@ -111,11 +111,32 @@ class SignUpViewController: UIViewController {
         return button
     }()
     
+    private let backButton: UIButton = {
+        let button = UIButton(type: .system)
+        button.backgroundColor = .red
+        button.setTitle("Back", for: .normal)
+        button.isEnabled = true
+        button.addTarget(self, action: #selector(backButtonTapped), for: .touchUpInside)
+        button.translatesAutoresizingMaskIntoConstraints = false
+        return button
+    }()
+    
     @objc private func signUpButtonTapped() {
-        print("Sign Up Tapped")
+        let albumsViewController = AlbumsViewController()
+        albumsViewController.loadViewIfNeeded()
+        albumsViewController.modalPresentationStyle = .fullScreen
+        present(albumsViewController, animated: true)
+    }
+    
+    @objc private func backButtonTapped() {
+        let authViewController = AuthViewController()
+        authViewController.loadViewIfNeeded()
+        authViewController.modalPresentationStyle = .fullScreen
+        present(authViewController, animated: true)
     }
     
     private var elementsStackView = UIStackView()
+    private var buttonsStackView = UIStackView()
     private let datePicker = UIDatePicker()
     
     override func viewDidLoad() {
@@ -129,9 +150,6 @@ class SignUpViewController: UIViewController {
     
     private func setupViews() {
         title = "SignUp"
-        
-        view.addSubview(scrollView)
-        scrollView.addSubview(backgroundView)
         
         elementsStackView = UIStackView(arrangedSubViews: [registerLabel,
                                                            firstNameTextField,
@@ -148,9 +166,16 @@ class SignUpViewController: UIViewController {
                                         axis: .vertical,
                                         spacing: 10,
                                         distibution: .fillProportionally)
+        
+        buttonsStackView = UIStackView(arrangedSubViews: [signUpButton, backButton],
+                                       axis: .horizontal,
+                                       spacing: 5,
+                                       distibution: .fillEqually)
+        view.addSubview(scrollView)
+        scrollView.addSubview(backgroundView)
         backgroundView.addSubview(elementsStackView)
         backgroundView.addSubview(registerLabel)
-        backgroundView.addSubview(signUpButton)
+        backgroundView.addSubview(buttonsStackView)
     }
     
     private func setupDelegate() {
@@ -159,7 +184,6 @@ class SignUpViewController: UIViewController {
         phoneNumberTextField.delegate = self
         emailTextField.delegate = self
         passwordTextField.delegate = self
-        
     }
     
     private func setupDatePicker() {
@@ -201,25 +225,23 @@ extension SignUpViewController {
             backgroundView.heightAnchor.constraint(equalTo: view.heightAnchor),
             backgroundView.widthAnchor.constraint(equalTo: view.widthAnchor)
         ])
+        NSLayoutConstraint.activate([
+            registerLabel.centerXAnchor.constraint(equalTo: backgroundView.centerXAnchor),
+            registerLabel.topAnchor.constraint(equalTo: backgroundView.topAnchor, constant: 30)
+        ])
         
         NSLayoutConstraint.activate([
             elementsStackView.centerXAnchor.constraint(equalTo: backgroundView.centerXAnchor),
-            elementsStackView.centerYAnchor.constraint(equalTo: backgroundView.centerYAnchor),
+            elementsStackView.topAnchor.constraint(equalTo: registerLabel.topAnchor, constant: 50),
             elementsStackView.leadingAnchor.constraint(equalTo: backgroundView.leadingAnchor, constant: 20),
             elementsStackView.trailingAnchor.constraint(equalTo: backgroundView.trailingAnchor, constant: -20)
         ])
         
         NSLayoutConstraint.activate([
-            registerLabel.centerXAnchor.constraint(equalTo: backgroundView.centerXAnchor),
-            registerLabel.bottomAnchor.constraint(equalTo: backgroundView.topAnchor, constant: -30)
+            buttonsStackView.centerXAnchor.constraint(equalTo: backgroundView.centerXAnchor),
+            buttonsStackView.bottomAnchor.constraint(equalTo: backgroundView.bottomAnchor, constant: -40),
+            buttonsStackView.heightAnchor.constraint(equalToConstant: 60),
+            buttonsStackView.widthAnchor.constraint(equalToConstant: 300)
         ])
-        
-        NSLayoutConstraint.activate([
-            signUpButton.centerXAnchor.constraint(equalTo: backgroundView.centerXAnchor),
-            signUpButton.topAnchor.constraint(equalTo: elementsStackView.bottomAnchor, constant: 40),
-            signUpButton.heightAnchor.constraint(equalToConstant: 40),
-            signUpButton.widthAnchor.constraint(equalToConstant: 200)
-        ])
-        
     }
 }
