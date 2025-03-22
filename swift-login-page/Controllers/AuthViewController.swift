@@ -98,13 +98,12 @@ class AuthViewController: UIViewController {
     @objc private func signUpButtonTapped() {
         let signUpViewController = SignUpViewController()
         signUpViewController.loadViewIfNeeded()
-        self.present(signUpViewController, animated: true)
+        signUpViewController.modalPresentationStyle = .fullScreen
+        present(signUpViewController, animated: true)
     }
     
     @objc private func signInButtonTapped() {
         print("tap")
-//        let signInButtonTapped = SignInViewController()
-//        self.present(signInButtonTapped, animated: true)
     }
 }
 
