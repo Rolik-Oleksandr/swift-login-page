@@ -199,7 +199,7 @@ class SignUpViewController: UIViewController {
 
 extension SignUpViewController: UITextFieldDelegate {
     
-    func fieldShouldReturn(_ textField: UITextField) -> Bool {
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         firstNameTextField.resignFirstResponder()
         secondNameTextField.resignFirstResponder()
         emailTextField.resignFirstResponder()
