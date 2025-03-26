@@ -10,7 +10,7 @@ class AuthViewController: UIViewController {
     
     private let backgroundView: UIView = {
         let view = UIView()
-        view.backgroundColor = .white
+        view.backgroundColor = UIColor(red: 0/255, green: 189/255, blue: 211/255, alpha: 1)
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
