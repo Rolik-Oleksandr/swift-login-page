@@ -91,6 +91,7 @@ class SignUpViewController: UIViewController {
         let textField = UITextField()
         textField.borderStyle = .roundedRect
         textField.placeholder = "Password"
+        textField.isSecureTextEntry = true
         textField.translatesAutoresizingMaskIntoConstraints = false
         return textField
     }()
@@ -139,6 +140,11 @@ class SignUpViewController: UIViewController {
     private var buttonsStackView = UIStackView()
     private let datePicker = UIDatePicker()
     
+    let nameValidType: String.ValidTypes = .name
+    let phoneNumberValidType: String.ValidTypes = .phoneNumber
+    let emailValidType: String.ValidTypes = .email
+    let passwordValidType: String.ValidTypes = .password
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -146,6 +152,7 @@ class SignUpViewController: UIViewController {
         setConstrains()
         setupDelegate()
         setupDatePicker()
+        registerKeyboardNotifications()
         }
     
     private func setupViews() {
@@ -195,9 +202,58 @@ class SignUpViewController: UIViewController {
         datePicker.layer.cornerRadius = 6
         datePicker.tintColor = .black
     }
+    
+    private func setTextField(textField: UITextField, label: UILabel,
+                              validType: String.ValidTypes,
+                              validMessage: String, wrongMessage: String,
+                              string: String, range: NSRange) {
+        let text = (textField.text ?? "") + string
+        let result: String
+        
+        if range.length == 1 {
+            let end = text.index(text.startIndex, offsetBy: text.count - 1)
+            result = String(text[text.startIndex..<end])
+        } else {
+            result = text
+        }
+        
+        textField.text = result
+        
+        if result.isValid(validtype: validType) {
+            label.text = validMessage
+            label.textColor = .green
+        } else {
+            label.text = wrongMessage
+            label.textColor = .red
+        }
+    }
 }
 
 extension SignUpViewController: UITextFieldDelegate {
+    
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        
+        switch textField {
+        case firstNameTextField: setTextField(textField: firstNameTextField, label: firstNameValidLabel,
+                                              validType: nameValidType, validMessage: "Name is Valid",
+                                              wrongMessage: "Name is not Valid", string: string, range: range)
+        case secondNameTextField: setTextField(textField: secondNameTextField, label: secondNameValidLabel,
+                                              validType: nameValidType, validMessage: "Name is Valid",
+                                              wrongMessage: "Name is not Valid", string: string, range: range)
+        case phoneNumberTextField: setTextField(textField: phoneNumberTextField, label: phoneNumberValidLabel,
+                                                validType: phoneNumberValidType, validMessage: "Phone is Valid",
+                                              wrongMessage: "Phone is not Valid", string: string, range: range)
+        case emailTextField: setTextField(textField: emailTextField, label: emailValidLabel,
+                                          validType: emailValidType, validMessage: "Email is Valid",
+                                              wrongMessage: "Email is not Valid", string: string, range: range)
+        case passwordTextField: setTextField(textField: passwordTextField, label: passwordValidLabel,
+                                             validType: passwordValidType, validMessage: "Password is Valid",
+                                              wrongMessage: "Password is not Valid", string: string, range: range)
+        default:
+            break
+        }
+        return false
+    }
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         firstNameTextField.resignFirstResponder()
@@ -207,6 +263,32 @@ extension SignUpViewController: UITextFieldDelegate {
         passwordTextField.resignFirstResponder()
         return true
     }
+}
+
+extension SignUpViewController {
+    private func registerKeyboardNotifications() {
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(keyboardWillShow),
+                                               name: UIResponder.keyboardWillShowNotification,
+                                               object: nil)
+
+        NotificationCenter.default.addObserver(self, selector: #selector(self.keyboardWillShow(notification:)), name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(self.keyboardWillShow(notification:)), name: UIResponder.keyboardWillHideNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(self.keyboardWillShow(notification:)), name:UIResponder.keyboardWillChangeFrameNotification, object: nil)
+    }
+    
+    @objc func keyboardWillShow(notification:Notification) {
+            guard let keyboardReact = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue else{
+                return
+            }
+
+            if notification.name == UIResponder.keyboardWillShowNotification ||  notification.name == UIResponder.keyboardWillChangeFrameNotification {
+                self.view.frame.origin.y = -keyboardReact.height / 3
+            } else {
+                self.view.frame.origin.y = 0
+            }
+
+        }
 }
 
 extension SignUpViewController {
@@ -227,7 +309,7 @@ extension SignUpViewController {
         ])
         NSLayoutConstraint.activate([
             registerLabel.centerXAnchor.constraint(equalTo: backgroundView.centerXAnchor),
-            registerLabel.topAnchor.constraint(equalTo: backgroundView.topAnchor, constant: 30)
+            registerLabel.topAnchor.constraint(equalTo: backgroundView.topAnchor, constant: 70)
         ])
         
         NSLayoutConstraint.activate([
