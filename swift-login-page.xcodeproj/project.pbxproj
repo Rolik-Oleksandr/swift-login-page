@@ -6,6 +6,10 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		AA91004AB705B17CCE86E1F6 /* Pods_swift_login_page.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7A2489FE1D1B8FEE82D72F9F /* Pods_swift_login_page.framework */; };
+/* End PBXBuildFile section */
+
 /* Begin PBXContainerItemProxy section */
 		1AA1B8FD2D88D6C900627565 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -24,9 +28,12 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		198239F40A34D06891FBB724 /* Pods-swift-login-page.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-swift-login-page.debug.xcconfig"; path = "Target Support Files/Pods-swift-login-page/Pods-swift-login-page.debug.xcconfig"; sourceTree = "<group>"; };
 		1AA1B8E62D88D6C800627565 /* swift-login-page.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "swift-login-page.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		1AA1B8FC2D88D6C900627565 /* swift-login-pageTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "swift-login-pageTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		1AA1B9062D88D6C900627565 /* swift-login-pageUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "swift-login-pageUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		7A2489FE1D1B8FEE82D72F9F /* Pods_swift_login_page.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_swift_login_page.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		B001BF1DA4FAF625C8EEEAFD /* Pods-swift-login-page.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-swift-login-page.release.xcconfig"; path = "Target Support Files/Pods-swift-login-page/Pods-swift-login-page.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
@@ -65,6 +72,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AA91004AB705B17CCE86E1F6 /* Pods_swift_login_page.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -92,6 +100,8 @@
 				1AA1B8FF2D88D6C900627565 /* swift-login-pageTests */,
 				1AA1B9092D88D6C900627565 /* swift-login-pageUITests */,
 				1AA1B8E72D88D6C800627565 /* Products */,
+				489BC1D985C59F4E3F37F2A9 /* Pods */,
+				55D1E1C4F1EB80882A0EF160 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -105,6 +115,23 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
+		489BC1D985C59F4E3F37F2A9 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				198239F40A34D06891FBB724 /* Pods-swift-login-page.debug.xcconfig */,
+				B001BF1DA4FAF625C8EEEAFD /* Pods-swift-login-page.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
+		55D1E1C4F1EB80882A0EF160 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				7A2489FE1D1B8FEE82D72F9F /* Pods_swift_login_page.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -112,6 +139,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 1AA1B90F2D88D6C900627565 /* Build configuration list for PBXNativeTarget "swift-login-page" */;
 			buildPhases = (
+				6A5EC360114EE962F8E8F66F /* [CP] Check Pods Manifest.lock */,
 				1AA1B8E22D88D6C800627565 /* Sources */,
 				1AA1B8E32D88D6C800627565 /* Frameworks */,
 				1AA1B8E42D88D6C800627565 /* Resources */,
@@ -124,8 +152,6 @@
 				1AA1B8E82D88D6C800627565 /* swift-login-page */,
 			);
 			name = "swift-login-page";
-			packageProductDependencies = (
-			);
 			productName = "swift-login-page";
 			productReference = 1AA1B8E62D88D6C800627565 /* swift-login-page.app */;
 			productType = "com.apple.product-type.application";
@@ -147,8 +173,6 @@
 				1AA1B8FF2D88D6C900627565 /* swift-login-pageTests */,
 			);
 			name = "swift-login-pageTests";
-			packageProductDependencies = (
-			);
 			productName = "swift-login-pageTests";
 			productReference = 1AA1B8FC2D88D6C900627565 /* swift-login-pageTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
@@ -170,8 +194,6 @@
 				1AA1B9092D88D6C900627565 /* swift-login-pageUITests */,
 			);
 			name = "swift-login-pageUITests";
-			packageProductDependencies = (
-			);
 			productName = "swift-login-pageUITests";
 			productReference = 1AA1B9062D88D6C900627565 /* swift-login-pageUITests.xctest */;
 			productType = "com.apple.product-type.bundle.ui-testing";
@@ -208,6 +230,9 @@
 			);
 			mainGroup = 1AA1B8DD2D88D6C800627565;
 			minimizedProjectReferenceProxies = 1;
+			packageReferences = (
+				1A0577462D93352700F8208D /* XCRemoteSwiftPackageReference "IQKeyboardManager" */,
+			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 1AA1B8E72D88D6C800627565 /* Products */;
 			projectDirPath = "";
@@ -243,6 +268,31 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		6A5EC360114EE962F8E8F66F /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-swift-login-page-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		1AA1B8E22D88D6C800627565 /* Sources */ = {
@@ -284,6 +334,7 @@
 /* Begin XCBuildConfiguration section */
 		1AA1B9102D88D6C900627565 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 198239F40A34D06891FBB724 /* Pods-swift-login-page.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -312,6 +363,7 @@
 		};
 		1AA1B9112D88D6C900627565 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = B001BF1DA4FAF625C8EEEAFD /* Pods-swift-login-page.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -565,6 +617,17 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		1A0577462D93352700F8208D /* XCRemoteSwiftPackageReference "IQKeyboardManager" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/hackiftekhar/IQKeyboardManager.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 8.0.1;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
 	};
 	rootObject = 1AA1B8DE2D88D6C800627565 /* Project object */;
 }
