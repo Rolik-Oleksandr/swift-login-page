@@ -58,6 +58,7 @@ class SignUpViewController: UIViewController {
     private let phoneNumberTextField : UITextField = {
         let textField = UITextField()
         textField.borderStyle = .roundedRect
+        textField.keyboardType = .numberPad
         textField.placeholder = "Phone Number"
         textField.translatesAutoresizingMaskIntoConstraints = false
         return textField
@@ -76,6 +77,7 @@ class SignUpViewController: UIViewController {
         textField.borderStyle = .roundedRect
         textField.placeholder = "Email"
         textField.translatesAutoresizingMaskIntoConstraints = false
+        textField.autocapitalizationType = .none
         return textField
     }()
     
@@ -123,10 +125,31 @@ class SignUpViewController: UIViewController {
     }()
     
     @objc private func signUpButtonTapped() {
-        let albumsViewController = AlbumsViewController()
-        albumsViewController.loadViewIfNeeded()
-        albumsViewController.modalPresentationStyle = .fullScreen
-        present(albumsViewController, animated: true)
+        let firstNameText = firstNameTextField.text ?? ""
+        let secondNameText = secondNameTextField.text ?? ""
+        let phoneNumerText = phoneNumberTextField.text ?? ""
+        let emailText = emailTextField.text ?? ""
+        let passwordText = passwordTextField.text ?? ""
+        
+        if firstNameText.isValid(validtype: nameValidType)
+            && secondNameText.isValid(validtype: nameValidType)
+            && phoneNumerText.count == 10
+            && emailText.isValid(validtype: emailValidType)
+            && passwordText.isValid(validtype: passwordValidType)
+            && ageIsValid() == true {
+            
+            DataBase.shared.saveUser(firstName: firstNameText,
+                                     secondName: secondNameText,
+                                     phone: phoneNumerText,
+                                     email: emailText,
+                                     password: passwordText,
+                                     age: datePicker.date)
+            registerLabel.text = "ok"
+                
+            } else{
+                authAlert(title: "Error", message: "Please enter correct data")
+            }
+        
     }
     
     @objc private func backButtonTapped() {
@@ -134,6 +157,10 @@ class SignUpViewController: UIViewController {
         authViewController.loadViewIfNeeded()
         authViewController.modalPresentationStyle = .fullScreen
         present(authViewController, animated: true)
+    }
+    
+    @objc func dismissKeyboard() {
+        view.endEditing(true)
     }
     
     private var elementsStackView = UIStackView()
@@ -153,6 +180,9 @@ class SignUpViewController: UIViewController {
         setupDelegate()
         setupDatePicker()
         registerKeyboardNotifications()
+        
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
+            view.addGestureRecognizer(tapGesture)
         }
     
     private func setupViews() {
@@ -226,6 +256,17 @@ class SignUpViewController: UIViewController {
             label.text = wrongMessage
             label.textColor = .red
         }
+    }
+    
+    private func ageIsValid() -> Bool {
+        let calendar = NSCalendar.current
+        let dateNow = Date()
+        let birthday = datePicker.date
+        
+        let age = calendar.dateComponents([.year], from: birthday, to: dateNow)
+        let ageYear = age.year
+        guard let ageUser = ageYear else { return false }
+        return (ageUser >= 18 ? true : false)
     }
 }
 
