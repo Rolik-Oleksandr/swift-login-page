@@ -40,6 +40,7 @@ class AlbumsViewController: UIViewController {
         navigationItem.searchController = searchController
         
         let userInfoButton = createCustomButton(selector: #selector(userInfoButtonTapped))
+        userInfoButton.target = self
         navigationItem.rightBarButtonItem = userInfoButton
     }
     
@@ -49,7 +50,9 @@ class AlbumsViewController: UIViewController {
     }
     
     @objc private func userInfoButtonTapped() {
-        print("tapped")
+        let userInfoViewController = UserInfoViewController()
+        userInfoViewController.modalPresentationStyle = .fullScreen
+        navigationController?.pushViewController(userInfoViewController, animated: true)
     }
 }
 //MARK: - Extension
